@@ -5,7 +5,7 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <Text style={styles.title}>Profile</Text>
-      <Text>We will build this screen in the profile stage.</Text>
+      <Text>DO TOMORROW.</Text>
     </SafeAreaView>
   );
 }
