@@ -1,6 +1,14 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Link } from "expo-router";
 import type { ReactElement } from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import type { GridPost } from "../data/exploreData";
 
@@ -23,17 +31,29 @@ export default function PostGrid({
       keyExtractor={(item) => item.id}
       ListHeaderComponent={header}
       showsVerticalScrollIndicator={false}
-      renderItem={({ item }) => (
-        <View style={styles.tile}>
-          <Image source={{ uri: item.image }} style={styles.image} />
+      renderItem={({ item, index }) => (
+        <Link
+          href={{
+            pathname: "/post",
+            params: { id: item.id },
+          }}
+          push
+          asChild
+        >
+          <Pressable
+            style={styles.tile}
+            accessibilityLabel={`Open post ${index + 1}`}
+          >
+            <Image source={{ uri: item.image }} style={styles.image} />
 
-          {showViews && (
-            <View style={styles.views}>
-              <Ionicons name="play-outline" size={16} color="#ffffff" />
-              <Text style={styles.viewCount}>{item.views}</Text>
-            </View>
-          )}
-        </View>
+            {showViews && (
+              <View style={styles.views}>
+                <Ionicons name="play-outline" size={16} color="#ffffff" />
+                <Text style={styles.viewCount}>{item.views}</Text>
+              </View>
+            )}
+          </Pressable>
+        </Link>
       )}
     />
   );
