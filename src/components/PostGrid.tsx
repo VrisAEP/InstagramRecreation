@@ -1,4 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import type { ReactElement } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 
 import type { GridPost } from "../data/exploreData";
@@ -6,15 +7,21 @@ import type { GridPost } from "../data/exploreData";
 type PostGridProps = {
   posts: GridPost[];
   showViews?: boolean;
+  header?: ReactElement;
 };
 
-export default function PostGrid({ posts, showViews = false }: PostGridProps) {
+export default function PostGrid({
+  posts,
+  showViews = false,
+  header,
+}: PostGridProps) {
   return (
     <FlatList
       style={styles.grid}
       data={posts}
       numColumns={3}
       keyExtractor={(item) => item.id}
+      ListHeaderComponent={header}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => (
         <View style={styles.tile}>
